@@ -1,8 +1,15 @@
 ### Advent of Code 2022
 
-Using this advent to learn c++ and the cmake build system.
+Using this year's advent of code to learn c++ and the cmake build system.
 This is in preparation for OMSCS at GT.
 
+### Using this repo
+
+Setup this repo by executing the following at root
+> cmake -S .
+
+You can build an advent day by using the following command
+> cmake --build . --target day_1
 
 ### Resources 
 A few helpful resources I used along the way.
