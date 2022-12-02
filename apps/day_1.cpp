@@ -9,6 +9,7 @@ int elf_calories();
 
 int main()
 {
+    // todo - move IO into shared lib
     if (std::filesystem::exists("./advent_input/day_1.txt"))
     {
         return elf_calories();
@@ -22,18 +23,12 @@ int main()
 
 int elf_calories()
 {
+    // todo - make this file_name shared
     std::string file_name = "./advent_input/day_1.txt";
-
-    // this crates an fstream with default value
     std::fstream fs;
     fs.open(file_name);
 
     std::string line;
-    // this approach removes whitespace
-    // while (fs >> line)
-    // {
-    //     std::cout << line << std::endl;
-    // }
     int current_elf = 1;
     int current_total_calories = 0;
     int max_calories = 0;
@@ -43,11 +38,6 @@ int elf_calories()
 
         if (line == "" && current_total_calories > max_calories)
         {
-            // std::cout << "new max calories!\n";
-            // std::cout << "old max: " << max_calories << "\n";
-            // std::cout << "new max: " << current_total_calories << "\n";
-            // std::cout << "old elf: " << max_calories_elf << "\n";
-            // std::cout << "new elf: " << current_elf << std::endl;
             max_calories = current_total_calories;
             max_calories_elf = current_elf;
             // code smell - repeated code...
@@ -57,14 +47,11 @@ int elf_calories()
         }
         else if (line == "")
         {
-            // std::cout << "no new max" << std::endl;
             current_elf++;
             current_total_calories = 0;
             continue;
         }
 
-        // process elf calories... simply add them up
-        // - trim whitespace
         try
         {
             trim(line);
