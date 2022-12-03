@@ -1,52 +1,63 @@
-#include <advent/lib.hpp>
-
-#include <fstream>
-#include <filesystem>
-#include <iostream>
-#include <string>
-
-int elf_calories();
+#include <day_1.hpp>
 
 int main()
 {
-    // todo - move IO into shared lib
-    if (std::filesystem::exists("./advent_input/day_1.txt"))
+    std::fstream fs;
+    auto file_name = startup();
+    auto file_opened = open_file(file_name, fs);
+    if (file_opened)
     {
-        return elf_calories();
+        elf_calories(fs);
     }
     else
     {
-        std::cout << "failed";
+        std::cout << "failed to open file" << std::endl;
         return -1;
+    }
+    return 0;
+}
+
+void add_elf_to_deque(elf elf, std::deque<struct elf> &elves)
+{
+    // no max elf calories
+    if (elves.size() == 0)
+    {
+        elves.push_front(elf);
+    }
+    // new largest elf
+    else if (elf.elf_calories > elves[0].elf_calories)
+    {
+        elves.push_front(elf);
+    }
+    // not a large elf
+    else
+    {
+        elves.push_back(elf);
     }
 }
 
-int elf_calories()
+void elf_calories(std::fstream &fs)
 {
-    // todo - make this file_name shared
-    std::string file_name = "./advent_input/day_1.txt";
-    std::fstream fs;
-    fs.open(file_name);
 
+    std::deque<struct elf> elves;
     std::string line;
+    std::vector<int> calories;
     int current_elf = 1;
     int current_total_calories = 0;
-    int max_calories = 0;
-    int max_calories_elf = 0;
     while (std::getline(fs, line))
     {
+        // std::cout << line << "\n";
 
-        if (line == "" && current_total_calories > max_calories)
+        if (line == "")
         {
-            max_calories = current_total_calories;
-            max_calories_elf = current_elf;
-            // code smell - repeated code...
-            current_elf++;
-            current_total_calories = 0;
-            continue;
-        }
-        else if (line == "")
-        {
+            add_elf_to_deque(
+                elf{
+                    elf_position : current_elf,
+                    elf_calories : current_total_calories
+                },
+                elves);
+            // do not process empty line, move to next elf
+            calories.push_back(current_total_calories);
             current_elf++;
             current_total_calories = 0;
             continue;
@@ -63,9 +74,20 @@ int elf_calories()
         }
     }
 
-    std::cout << "max calorie elf is: " << max_calories_elf << "\n";
-    std::cout << "max calories is: " << max_calories << "\n";
-    std::cout << "total elves: " << current_elf << std::endl;
+    std::sort(calories.begin(), calories.end());
+    for (auto cal : std::vector<int>(calories.rbegin(), calories.rbegin() + 3))
+    {
+        std::cout << cal << "\n";
+    }
 
-    return 0;
+    std::cout << "max calorie elf is: " << elves[0].elf_position << "\n";
+    std::cout << "max calories is: " << elves[0].elf_calories << "\n";
+    // part 2
+    // find the top 3
+    std::cout << "2nd elf calories is: " << elves[1].elf_calories << "\n";
+    std::cout << "2nd elf position is: " << elves[1].elf_position << "\n";
+    std::cout << "3rd elf calories is: " << elves[2].elf_calories << "\n";
+    std::cout << "3rd elf position is: " << elves[2].elf_position << "\n";
+
+    std::cout << "total of top 3 is: " << elves[0].elf_calories + elves[1].elf_calories + elves[2].elf_calories << std::endl;
 }
