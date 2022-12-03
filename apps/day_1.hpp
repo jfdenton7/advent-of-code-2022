@@ -8,14 +8,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <numeric>
 
-struct elf
-{
-    int elf_position;
-    int elf_calories;
-};
-
-void add_elf_to_deque(elf elf, std::deque<struct elf> &deq);
+using std::cout;
 
 void elf_calories(std::fstream &fs);
 
