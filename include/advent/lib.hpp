@@ -15,6 +15,6 @@ void rtrim(std::string &s);
 void trim(std::string &s);
 
 bool open_file(std::string &file, std::fstream &fs);
-std::string startup();
+std::string startup(int day);
 
 #endif /* UTILS_H */

@@ -1,16 +1,13 @@
 #include <advent/lib.hpp>
 
-std::string startup()
+const int BUFFER_SZ = 250;
+std::string startup(int day)
 {
-    std::string file_name;
-    std::cout
-        << "Path to input file (^D to default: \"./advent_input/day_1.txt\"): " << std::endl;
+    char buffer[BUFFER_SZ] = {0};
+    // sizeof op?
+    std::snprintf(buffer, BUFFER_SZ - 1, "./advent_input/day_%d.txt", day);
 
-    if (!(std::cin >> file_name))
-    {
-        file_name = "./advent_input/day_1.txt";
-    }
-    return file_name;
+    return std::string(buffer);
 }
 
 //  =========== STRING UTILS =========== //
