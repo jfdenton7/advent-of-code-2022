@@ -1,7 +1,7 @@
 
 #pragma once
-#ifndef __DAY_1_HPP
-#define __DAY_1_HPP
+#ifndef __DAY_2_HPP
+#define __DAY_2_HPP
 #include <advent/lib.hpp>
 
 #include <fstream>

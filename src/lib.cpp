@@ -1,13 +1,14 @@
 #include <advent/lib.hpp>
 
-const int BUFFER_SZ = 250;
-std::string startup(int day)
+const size_t BUFFER_SZ = 50;
+std::filesystem::path startup(int day)
 {
-    char buffer[BUFFER_SZ] = {0};
-    // sizeof op?
-    std::snprintf(buffer, BUFFER_SZ - 1, "./advent_input/day_%d.txt", day);
-
-    return std::string(buffer);
+    char file_name[BUFFER_SZ] = {0};
+    std::snprintf(file_name, BUFFER_SZ - 1, "day_%d.txt", day);
+    std::filesystem::path dir("./advent_input");
+    std::filesystem::path file(file_name);
+    std::cout << dir / file;
+    return dir / file;
 }
 
 //  =========== STRING UTILS =========== //
@@ -33,11 +34,11 @@ void trim(std::string &s)
 }
 
 //  =========== FILE IO =========== //
-bool open_file(std::string &file, std::fstream &fs)
+bool open_file(const std::filesystem::path &path, std::fstream &fs)
 {
-    if (std::filesystem::exists(file))
+    if (std::filesystem::exists(path))
     {
-        fs.open(file);
+        fs.open(path);
         return true;
     }
     return false;
