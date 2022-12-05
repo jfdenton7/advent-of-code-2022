@@ -10,11 +10,13 @@
 #include <iostream>
 #include <deque>
 
+namespace fs = std::filesystem;
+
 void ltrim(std::string &s);
 void rtrim(std::string &s);
 void trim(std::string &s);
 
-bool open_file(std::filesystem::path &path, std::fstream &fs);
-std::filesystem::path startup(int day);
+bool open_file(const fs::path &path, std::fstream &fs);
+fs::path startup(int day);
 
 #endif /* UTILS_H */

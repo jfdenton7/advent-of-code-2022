@@ -3,12 +3,13 @@
 const size_t BUFFER_SZ = 50;
 std::filesystem::path startup(int day)
 {
+    // TODO - need to somehow get this hooked in....
+	// "C:\Users\Josiah\source\repos\advent - of - code - 2022\advent_input\day_3.txt"
     char file_name[BUFFER_SZ] = {0};
     std::snprintf(file_name, BUFFER_SZ - 1, "day_%d.txt", day);
-    std::filesystem::path dir("./advent_input");
-    std::filesystem::path file(file_name);
-    std::cout << dir / file;
-    return dir / file;
+    fs::path file(file_name);
+    std::cout << fs::current_path() / file;
+    return fs::current_path() / file;
 }
 
 //  =========== STRING UTILS =========== //
