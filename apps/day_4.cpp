@@ -26,12 +26,12 @@ std::vector<int> parse_ranges(std::fstream& fs)
     int total_overlap = 0;
     while (std::getline(fs, assignment_pair))
     {
-		std::string assignment_delim(",");
-		auto v = ssplit_on(assignment_pair, assignment_delim);
-		Range r1;
-		Range r2;
-		r1.set_range(v.front());
-		r2.set_range(v.back());
+        std::string assignment_delim(",");
+        auto v = ssplit_on(assignment_pair, assignment_delim);
+        Range r1;
+        Range r2;
+        r1.set_range(v.front());
+        r2.set_range(v.back());
         total_overlap = (r1.overlaps(r2) || r2.overlaps(r1)) ? total_overlap + 1 : total_overlap;
         total_contain_fully = (r1.contains(r2) || r2.contains(r1)) ? total_contain_fully + 1 : total_contain_fully;
     }
@@ -74,7 +74,8 @@ bool Range::overlaps(Range r) {
 
 
     // if the boundaries cross at all! (OR!)
-    if ((r.lower >= this->lower && r.lower <= this->upper)|| (r.upper <= this->upper && r.upper >= this->lower))
+    if ((r.lower >= this->lower && r.lower <= this->upper) || 
+        (r.upper <= this->upper && r.upper >= this->lower))
     {
         return true;
     }
