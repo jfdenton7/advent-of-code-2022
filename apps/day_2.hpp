@@ -14,6 +14,8 @@
 #include <tuple>
 #include <cstdio>
 
+const int DAY = 2;
+
 using std::cout;
 
 enum class Hand

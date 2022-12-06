@@ -12,31 +12,44 @@
 #include <iostream>
 #include <fstream>
 #include <filesystem>
+#include <stdexcept>
+
+const int DAY = 3;
 
 class Rucksack
 {
 public:
     Rucksack(std::string &sack);
     int priority();
+    std::set<char> get_unique();
 
 private:
     int priority_sum;
+    std::string rucksack;
     std::vector<std::string> compartments;
-    int item_priority(char item);
-
-    const int LOWER_OFF = 96;
-    const int UPPER_OFF = 64;
 };
 
 class Storage
 {
 public:
     Storage(std::fstream &fs);
-    ~Storage();
     int storage_priority;
+    int total_badge_priority;
 private:
-    std::vector<Rucksack*> rucksacks;
 };
 
+class BadgeGroup
+{
+public:
+    BadgeGroup(std::vector<Rucksack*> group);
+    ~BadgeGroup();
+    char get_badge_item();
+private:
+    std::vector<Rucksack*> group;
+};
+
+int item_priority(char item);
+const int LOWER_OFF = 96;
+const int UPPER_OFF = 64;
 
 #endif

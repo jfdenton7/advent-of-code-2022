@@ -3,7 +3,7 @@
 int main()
 {
     std::fstream fs;
-    auto file_name = startup(1);
+    auto file_name = startup(DAY);
     auto file_opened = open_file(file_name, fs);
     if (file_opened)
     {
