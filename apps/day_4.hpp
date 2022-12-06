@@ -21,6 +21,5 @@ public:
 };
 
 std::vector<int> parse_ranges(std::fstream& fs);
-bool check_range_overlap(std::string& assignment_pair);
 
 #endif // !__DAY_4_HPP

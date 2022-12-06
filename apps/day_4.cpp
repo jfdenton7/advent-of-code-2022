@@ -38,15 +38,6 @@ std::vector<int> parse_ranges(std::fstream& fs)
     return std::vector<int>{total_contain_fully, total_overlap};
 }
 
-bool check_range_overlap(Range r1, Range r2) 
-{
-	if (r1.contains(r2) || r2.contains(r1))
-	{
-        return true;
-	}
-    return false;
-}
-
 Range::Range()
 {
     this->upper = 0;
