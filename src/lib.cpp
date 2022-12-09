@@ -52,3 +52,18 @@ bool open_file(const std::filesystem::path &path, std::fstream &fs)
     }
     return false;
 }
+
+std::string grab_and_jump(std::istringstream& ss, int grab, int jump)
+{
+    // NOTE: new also calls the constructor!
+    char* chunk = new char[grab + 1]();
+    for (int i = 0; i < grab; i++) {
+        *(chunk + i) = ss.get();
+    }
+    for (int i = 0; i < jump; i++) {
+        ss.get();
+    }
+    std::string s(chunk);
+    delete[] chunk;
+    return s;
+}
