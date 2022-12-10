@@ -23,6 +23,11 @@ add_executable(day_5 day_5.cpp)
 target_compile_features(day_5 PRIVATE cxx_std_17)
 target_include_directories(day_5 PUBLIC ./)
 target_link_libraries(day_5 PRIVATE advent_of_code_lib)
+# day 6
+add_executable(day_6 day_6.cpp)
+target_compile_features(day_6 PRIVATE cxx_std_17)
+target_include_directories(day_6 PUBLIC ./)
+target_link_libraries(day_6 PRIVATE advent_of_code_lib)
 
 # test
 add_executable(test "test.cpp")
