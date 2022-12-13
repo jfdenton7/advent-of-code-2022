@@ -3,6 +3,8 @@
 #include <string>
 #include <cassert>
 
+
+void test_substr();
 void test_ssplit_on();
 void test_grab_and_jump();
 void test_grab_and_jump_with_blanks();
@@ -12,6 +14,7 @@ int main()
 	test_ssplit_on();
 	test_grab_and_jump();
 	test_grab_and_jump_with_blanks();
+	test_substr();
 	return 0;
 }
 
@@ -50,4 +53,13 @@ void test_grab_and_jump_with_blanks()
 	assert(res == std::string("   "));
 	res = grab_and_jump(ss, 3, 1);
 	assert(res == std::string("[M]"));
+}
+
+void test_substr()
+{
+	std::string s("$ cd wlpcb");
+	s = s.substr(s.find('$') + 2);
+	assert(s == std::string("cd wlpcb"));
+	s = s.substr(s.find(' ') + 1);
+	assert(s == std::string("wlpcb"));
 }

@@ -67,3 +67,15 @@ std::string grab_and_jump(std::istringstream& ss, int grab, int jump)
     delete[] chunk;
     return s;
 }
+
+std::vector<std::string> parse_problem_input(std::fstream& fs)
+{
+    std::string line;
+    std::vector<std::string> out;
+    while (std::getline(fs, line))
+    {
+        out.push_back(line);
+    }
+    return out;
+}
+

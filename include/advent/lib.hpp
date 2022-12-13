@@ -21,6 +21,7 @@ void trim(std::string &s);
 std::vector<std::string> ssplit_on(std::string &s, std::string &delim);
 
 std::string grab_and_jump(std::istringstream& ss, int grab, int jump);
+std::vector<std::string> parse_problem_input(std::fstream &fs);
 
 
 bool open_file(const fs::path &path, std::fstream &fs);
