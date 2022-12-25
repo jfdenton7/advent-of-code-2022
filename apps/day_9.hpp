@@ -8,6 +8,7 @@
 #include <fstream>
 #include <tuple>
 #include <vector>
+#include <string>
 
 const int DAY = 9;
 
@@ -22,6 +23,15 @@ enum MoveDirection
     DOWN
 };
 
+// 49x49
+enum Piece
+{
+    HEAD_TAIL,
+    TAIL,
+    HEAD,
+    EMPTY
+};
+
 enum RelativePosition
 {
     ON,
@@ -32,22 +42,14 @@ enum RelativePosition
     DIAGONAL_TOP_LEFT,
     DIAGONAL_TOP_RIGHT,
     DIAGONAL_BOTOM_LEFT,
-    DIAGONAL_BOTOM_RIGHT
+    DIAGONAL_BOTOM_RIGHT,
+    UNKNOWN
 };
 
-enum Piece
-{
-    HEAD,
-    TAIL,
-    HEAD_TAIL, // Head covers Tails
-    EMPTY
-};
-
-std::vector<std::vector<Piece>> setup_board();
-std::vector<int> get_head_pos(std::vector<std::vector<Piece>> board);
-RelativePosition get_head_tail_orientation(std::vector<std::vector<Piece>> board);
-bool head_moves_out(std::vector<std::vector<Piece>> board, MoveDirection md);
-std::vector<std::vector<Piece>> update_board(std::vector<std::vector<Piece>> board, MoveDirection md);
-RelativePosition get_new_head_position(std::vector<std::vector<Piece>> board, MoveDirection md);
+int move_rope(std::fstream &fs);
+std::tuple<int, RelativePosition> do_moves(RelativePosition rpos, MoveDirection md, int cnt);
+// std::tuple<bool, RelativePosition> process_move(RelativePosition pos, MoveDirection md);
+bool head_moves_out(RelativePosition rpos, MoveDirection md);
+RelativePosition get_new_head_position(RelativePosition rpos, MoveDirection md);
 
 #endif // !__DAY_9__HPP

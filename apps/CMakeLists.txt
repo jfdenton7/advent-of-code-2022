@@ -43,6 +43,7 @@ add_executable(day_9 day_9.cpp)
 target_compile_features(day_9 PRIVATE cxx_std_17)
 target_include_directories(day_9 PUBLIC ./)
 target_link_libraries(day_9 PRIVATE advent_of_code_lib)
+target_compile_options(day_9 PRIVATE -Werror -Wall -Wextra -pedantic -g -O0)
 # test
 add_executable(test "test.cpp")
 target_compile_features(test PRIVATE cxx_std_17)
